@@ -81,6 +81,9 @@ const startServer = (port, auth) =>
 
     const webhook = new Autohook(config);
     await webhook.removeWebhooks();
+    webhook.on('event', (event) => {
+      console.log('Something happened:', event);
+    });
     await webhook.start(webhookURL);
     await webhook.subscribe({
       oauth_token: config.token,
